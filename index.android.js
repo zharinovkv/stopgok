@@ -1,10 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import {AppRegistry} from 'react';
-import Root from './components/Root.js';
+import { AppRegistry } from 'react-native';
+import Root from './components/android/root.js';
 
 AppRegistry.registerComponent('stopgok', () => Root);
