@@ -19,6 +19,13 @@ export default class Root extends Component {
 
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
+    fetch('http://facebook.github.io/react-native/movies.json',{
+        mode: 'no-cors',
+        method: 'get'
+      }).then((res) => res.json())
+        .then((resJSON) => console.info(resJSON));
+
+
     this.state = {
         news: ds.cloneWithRows([{
             title: 'Боевой повар Сома',
@@ -40,7 +47,6 @@ export default class Root extends Component {
     return (
       <ScrollView>
         <ToolbarAndroid
-          logo={}
           style={ styles.toolbar }>
             <View>
                 <Text style={ styles.toolbarTitle }>#стопгок</Text>
