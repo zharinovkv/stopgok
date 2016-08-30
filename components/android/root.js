@@ -19,28 +19,17 @@ export default class Root extends Component {
 
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
-    fetch('http://facebook.github.io/react-native/movies.json',{
-        mode: 'no-cors',
-        method: 'get'
-      }).then((res) => res.json())
-        .then((resJSON) => console.info(resJSON));
+    this.state.posts = [];
 
+    fetch('http://stopgok.troinof.ru/articles/all', { method: "GET" })
+      .then((res) => res.json())
+      .then((resData) => {
+        this.state = { posts: ds.cloneWithRows(resData) };
+      })
+      .catch((error) => {
+        console.error('err: ', error);
+      });
 
-    this.state = {
-        news: ds.cloneWithRows([{
-            title: 'Боевой повар Сома',
-            thumb: 'https://pp.vk.me/c623321/v623321919/2557c/Ya2lOAITmFs.jpg',
-            description: 'Юкихира Сома мечтает стать штатным шеф-поваром в ресторане отца и превзойти своего родителя на профессиональном поприще. Он упорно идет навстречу мечте, но в тот момент, когда средняя школа остается позади, отец, Юкихира Дзёитиро, закрывает свое заведение и отправляется на покорение Европы.'
-        }, {
-            title: 'Стоп гок новость 2',
-            thumb: 'http://www.miandra-medical.ro/www/wp-content/uploads/2015/11/dummy-articol.jpg',
-            description: 'И снова новости про стоп гок'
-        }, {
-            title: 'Не боевой повар сома',
-            thumb: 'https://pp.vk.me/c623321/v623321919/2557c/Ya2lOAITmFs.jpg',
-            description: 'Близится последняя битва между самыми талантливыми первогодками кулинарной академии Тооцуки. Кто же станет победителем 43-го кулинарного турнира Осенних выборов? Мастер индийских специй Акира, воплощение яростно и безумной кулинарии Курокиба или доморощенный гений Юкихира. Кто из них достоин претендовать на место в элитной 10-ке лучших поваров академии?'
-        }])
-    };
   }
 
   render() {
@@ -53,8 +42,8 @@ export default class Root extends Component {
             </View>
         </ToolbarAndroid>
         <ListView
-            dataSource={ this.state.news }
-            renderRow={(news) => <Row {...news} />} />
+            dataSource={ this.state.posts }
+            renderRow={(posts) => <Row {...posts} />} />
       </ScrollView>
     );
   }

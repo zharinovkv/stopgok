@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const Row = news => (
+const Row = posts => (
   <View style={ styles.row }>
     <TouchableHighlight onPress={() => {
       fetch('http://resources.finance.ua/ru/public/currency-cash.json')
@@ -38,8 +38,8 @@ const Row = news => (
         });
     }}>
       <View>
-        <Text style={ styles.title }>{ news.title }</Text>
-        <Image source={{ uri: news.thumb }} style={ styles.thumb } />
+        <Text style={ styles.title }>{ posts.title }</Text>
+        <Image source={{ uri: posts.thumb }} style={ styles.thumb } />
         <View></View>
       </View>
     </TouchableHighlight>
